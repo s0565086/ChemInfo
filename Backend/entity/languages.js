@@ -7,23 +7,8 @@ module.exports = {
             type: "int",
             generated: true
         },
-        name: {
-            type: "string"
-        },
         language: {
             type: "string"
-        },
-        type: {
-            type: "string"
-        },
-        supplement: {
-            type: "string"
-        },
-        creation_time: {
-            type: "date"
-        },
-        update_time: {
-            type: "date"
         }
     }
 };
