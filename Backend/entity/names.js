@@ -7,9 +7,6 @@ module.exports = {
             type: "int",
             generated: true
         },
-        name: {
-            type: "string"
-        },
         language: {
             type: "string"
         },
@@ -24,6 +21,20 @@ module.exports = {
         },
         update_time: {
             type: "date"
+        }
+    },
+    relations:{
+        languages: {
+            target: "Languages",
+            type: "many-to-one",
+            joinTable: true,
+            cascade: true
+        },
+        name: {
+            target: "Name",
+            type: "many-to-one",
+            joinTable: true,
+            cascade: true
         }
     }
 };

@@ -7,29 +7,49 @@ module.exports = {
             type: "int",
             generated: true
         },
-        denomination: {
-            type: "string"
-        },
         gsbl_rn: {
             type: "int"
         },
         creation_time: {
             type: "date"
+        }
+    },
+    relations:{
+        denomination: {
+            target: "names",
+            type: "one-to-many",
+            joinTable: true,
+            cascade: true
         },
         characteristics: {
-            type: "string"
+            target: "Characteristics",
+            type: "many-to-many",
+            joinTable: true,
+            cascade: true
         },
-        danger: {
-            type: "string"
+        dangers: {
+            target: "dangers",
+            type: "many-to-many",
+            joinTable: true,
+            cascade: true
         },
         security: {
-            type: "string"
+            target: "security",
+            type: "many-to-many",
+            joinTable: true,
+            cascade: true
         },
         uses: {
-            type: "string"
+            target: "uses",
+            type: "many-to-many",
+            joinTable: true,
+            cascade: true
         },
         regulations: {
-            type: "string"
+            target: "regulations",
+            type: "many-to-many",
+            joinTable: true,
+            cascade: true
         }
     }
 };
