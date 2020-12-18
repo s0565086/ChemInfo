@@ -18,9 +18,6 @@ module.exports = {
         },
         creation_time: {
             type: "date"
-        },
-        update_time: {
-            type: "date"
         }
     },
     relations:{
@@ -30,9 +27,15 @@ module.exports = {
             joinTable: true,
             cascade: true
         },
-        name: {
-            target: "Name",
+        types: {
+            target: "Types",
             type: "many-to-one",
+            joinTable: true,
+            cascade: true
+        },
+        updated:{
+            target: "updated",
+            type: "one-to-many",
             joinTable: true,
             cascade: true
         }

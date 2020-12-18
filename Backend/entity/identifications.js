@@ -28,25 +28,25 @@ module.exports = {
             cascade: true
         },
         dangers: {
-            target: "dangers",
+            target: "Dangers",
             type: "many-to-many",
             joinTable: true,
             cascade: true
         },
         security: {
-            target: "security",
+            target: "Security",
             type: "many-to-many",
             joinTable: true,
             cascade: true
         },
         uses: {
-            target: "uses",
+            target: "Uses",
             type: "many-to-many",
             joinTable: true,
             cascade: true
         },
         regulations: {
-            target: "regulations",
+            target: "Regulations",
             type: "many-to-many",
             joinTable: true,
             cascade: true
