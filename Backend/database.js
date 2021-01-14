@@ -1,22 +1,10 @@
-const typeorm = require('typeorm')
+const Pool = require('pg').Pool;
+const pool = new Pool({
+  user: 'kira',
+  password: 'Passwort123',
+  host: 'kalira.de',
+  database: 'ChemInfo',
+  port: 5432,
+});
 
-function openDatabaseConnection() {
-  return typeorm.createConnection({
-    type: "mysql",
-    host: "localhost",
-    port: 3306,
-    username: "root",
-    password: "root",
-    database: "cheminfo",
-    synchronize: true,
-    logging: true,
-    entities: [
-      require('./entity/SubstanceSchema')
-    ]
-  })
-}
-
-
-module.exports = {
-  openDatabaseConnection
-}
+module.exports = pool;
