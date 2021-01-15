@@ -46,15 +46,19 @@ router.get('/name/:name', async (req, res) => {
     }
 });
 //new chem
-// router.post('/new', async (req, res) => {
-//     const { cas_rn, gsbl_rn, chem_description } = req.body;
-//     try {
-//         const newUser = await pool.query('INSERT INTO users (user_id, user_username, user_password, user_firstname, user_lastname, role, user_key, user_description) ' +
-//             'VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', [user_id, user_username, user_password, user_firstname, user_lastname, role, user_key, user_description]);
-//         res.json(newUser);
-//     }catch (err) {
-//         console.log(err);
-//     }
-// });
+router.post('/new', async (req, res) => {
+     const { chem_id, cas_rn, gsbl_rn, chem_description,
+         name_id, name_name, language, type, creation_time, supplement, name_description  } = req.body;
+     try {
+         const newIdentifications = await pool.query('INSERT INTO identifications (chem_id, cas_rn, gsbl_rn, creation_time, chem_description) ' +
+             'VALUES ($1, $2, $3, $4, $5)', [chem_id, cas_rn, gsbl_rn, creation_time, chem_description]);
+         const newName = await pool.query('INSERT INTO names (name_id, chemical, name_name, language, type, creation_time, supplement, name_description) ' +
+             'VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', [name_id, chem_id, name_name, language, type, creation_time, supplement, name_description]);
+         res.json(newIdentifications);
+         res.json(newName);
+     }catch (err) {
+         console.log(err);
+     }
+});
 //update chem
 module.exports = router;

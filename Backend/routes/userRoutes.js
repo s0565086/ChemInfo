@@ -23,10 +23,10 @@ router.get('/:id', async (req, res) => {
 });
 // post new user
 router.post('/new', async (req, res) => {
-    const { user_id, user_username, user_password, user_firstname, user_lastname, role, user_key, user_description } = req.body;
+    const { user_id, user_username, user_password, user_firstname, user_lastname, user_role, user_key, user_description } = req.body;
     try {
-        const newUser = await pool.query('INSERT INTO users (user_id, user_username, user_password, user_firstname, user_lastname, role, user_key, user_description) ' +
-            'VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', [user_id, user_username, user_password, user_firstname, user_lastname, role, user_key, user_description]);
+        const newUser = await pool.query('INSERT INTO users (user_id, user_username, user_password, user_firstname, user_lastname, user_role, user_key, user_description) ' +
+            'VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', [user_id, user_username, user_password, user_firstname, user_lastname, user_role, user_key, user_description]);
         res.json(newUser);
     }catch (err) {
         console.log(err);
