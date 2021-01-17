@@ -10,10 +10,12 @@ app.use(
       extended: true,
     })
 );
+
 const chemRouter = require('./routes/chemRoutes');
 app.use('/chems', chemRouter);
 
 const userRouter = require('./routes/userRoutes');
+
 app.use('/user', userRouter);
 
 app.listen(PORT, () => {
