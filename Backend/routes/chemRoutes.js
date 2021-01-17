@@ -5,7 +5,7 @@ const pool = require('../database');
 // GET chemical list
 router.get('/', async (req, res) => {
     try {
-        const chems = await pool.query('SELECT identifications.chem_id, identifications.cas_rn, names.name_id, names.chemical, names.name_name, names.language, names.type, names.supplement, names.name_description  ' +
+        const chems = await pool.query('SELECT identifications.chem_id, identifications.cas_rn, names.name_name, names.language  ' +
             'FROM identifications ' +
             'INNER JOIN names ON identifications.chem_id = names.chemical ' +
             'ORDER BY chem_id ASC;');
@@ -20,11 +20,11 @@ router.get('/:query', async (req, res) => {
     const param = req.params.query;
     const query = '%' + param + '%';
     try {
-        const chems = await pool.query('SELECT identifications.chem_id, identifications.cas_rn, names.name_id, names.chemical, names.name_name ' +
+        const chems = await pool.query('SELECT identifications.chem_id, identifications.cas_rn, names.name_name, names.language ' +
             'FROM identifications ' +
             'INNER JOIN names ON identifications.chem_id = names.chemical ' +
             'WHERE identifications.cas_rn LIKE $1 ' +
-            'OR names.name_name LIKE $1', [query]);
+            'OR UPPER(names.name_name) LIKE UPPER($1)', [query]);
         res.json(chems.rows);
 
     }catch (err) {
@@ -37,8 +37,8 @@ router.post('/new', async (req, res) => {
     const { cas_rn, gsbl_rn, chem_description, name_name, language, type, creation_time, supplement, name_description  } = req.body;
     try {
         //set id values to max
-        const setID = await pool.query("SELECT setval('identifications_chem_id_seq', (SELECT MAX(chem_id) FROM identifications));");
-        const setID2 = await pool.query("SELECT setval('names_name_id_seq', (SELECT MAX(name_id) FROM names));");
+        //const setID = await pool.query("SELECT setval('identifications_chem_id_seq', (SELECT MAX(chem_id) FROM identifications));");
+        //const setID2 = await pool.query("SELECT setval('names_name_id_seq', (SELECT MAX(name_id) FROM names));");
         const newChem = await pool.query('WITH ins1 AS (' +
             'INSERT INTO identifications (cas_rn, gsbl_rn, creation_time, chem_description) ' +
             'VALUES ($1, $2, $7, $3) ' +
