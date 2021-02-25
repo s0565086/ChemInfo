@@ -1,4 +1,5 @@
 const express = require('express');
+const exphbs = require('express-handlebars');
 //const routes = require('./routes/routes');
 const bodyParser = require("body-parser");
 const app = express();
@@ -10,13 +11,23 @@ app.use(
       extended: true,
     })
 );
+app.engine('handlebars', exphbs({
+    defaultLayout: 'main',
+    helpers: require('./config/handlebarHelpers')
+}))
+app.set('view engine', 'handlebars')
 
-const chemRouter = require('./routes/chemRoutes');
-app.use('/chems', chemRouter);
+app.use('/', require('./routes/chems.router'))
+// app.get('/', function (req, res) {
+//     res.render('allChemicals')
+// })
 
-const userRouter = require('./routes/userRoutes');
+// const chemRouter = require('./routes/chemRoutes');
+// app.use('/chems', chemRouter);
 
-app.use('/user', userRouter);
+// const userRouter = require('./routes/userRoutes');
+//
+// app.use('/user', userRouter);
 
 app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`);

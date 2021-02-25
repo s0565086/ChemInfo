@@ -1,0 +1,41 @@
+<div id="gross">
+    <table class="chems">
+        <thead>
+        <tr>
+            <th colspan="5">Chemikalien</th>
+        </tr>
+        <tr>
+            <th>
+                <span>ID</span>
+            </th>
+            <th>
+                <span>CAS-RN</span>
+            </th>
+            <th>
+                <span>Name</span>
+            </th>
+            <th>
+                <span>Sprache</span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each allChems}}
+            <tr>
+                <td>
+                    <span>{{this.chem_id}}</span>
+                </td>
+                <td>
+                    <span>{{this.cas_rn}}</span>
+                </td>
+                <td>
+                    <span>{{this.name_name}}</span>
+                </td>
+                <td>
+                    <span>{{this.language}}</span>
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</div>
