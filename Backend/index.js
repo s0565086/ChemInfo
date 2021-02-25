@@ -17,9 +17,9 @@ app.engine('handlebars', exphbs({
 }))
 app.set('view engine', 'handlebars')
 
-app.use('/', require('./routes/chems.router'))
+app.use('/', require('./routes/index.router'))
 // app.get('/', function (req, res) {
-//     res.render('allChemicals')
+//     res.render('main')
 // })
 
 // const chemRouter = require('./routes/chemRoutes');
