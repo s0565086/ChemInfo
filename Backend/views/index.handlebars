@@ -1,0 +1,14 @@
+<div>
+    <form id="searchForm" method="get">
+        <input type="text" id="chemicalParam">
+        <input type="button" name="searchBt" value="Suchen" onclick="submit_search()">
+    </form>
+</div>
+<script>
+    function submit_search() {
+        const param = document.getElementById("chemicalParam").value
+        const url = "/chemicals/" + param
+        document.getElementById("searchForm").action = url
+        document.getElementById("searchForm").submit();
+    }
+</script>
