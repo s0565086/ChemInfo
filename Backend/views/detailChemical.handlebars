@@ -1,0 +1,13 @@
+<div>
+    <form action="/chemicals/edit/{{chem.name_id}}" method="get">
+        <h2>{{chem.name_name}}</h2>
+        <p>Chemikalien-ID: {{chem.chem_id}}</p>
+        <p>Name: <input type="text" name="name_name" id="name_name" value="{{chem.name_name}}"></p>
+        <p>GSBL-RN: {{chem.gsbl_rn}}</p>
+        <p>CAS-RN: {{chem.cas_rn}}</p>
+        <p>Sprache: {{chem.language}}</p>
+        <p>Namenstyp: {{chem.type}}</p>
+        <p>Beschreibung: {{chem.chem_description}}</p>
+        <input type="submit" value="Bearbeiten">
+    </form>
+</div>
