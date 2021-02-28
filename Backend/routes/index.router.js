@@ -5,4 +5,6 @@ router.get('/', homeController.index)
 
 router.use('/chemicals', require('./chems.router'))
 
-module.exports = router
+router.use('/aboutus', require('./aboutus.router'))
+
+module.exports = router;

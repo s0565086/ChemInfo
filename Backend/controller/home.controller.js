@@ -1,5 +1,5 @@
 module.exports = {
     index: async (req, res) => {
-        res.render('index')
+        res.render('index', { title: 'ChemInfo'})
     }
 }
