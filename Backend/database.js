@@ -1,7 +1,7 @@
 const Pool = require('pg').Pool;
 const pool = new Pool({
   user: 'kira',
-  password: 'Passwort123',
+  password: 'INSERT_PASSWORD',
   host: 'kalira.de',
   database: 'ChemInfo',
   port: 5432,
