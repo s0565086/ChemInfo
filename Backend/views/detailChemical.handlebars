@@ -35,13 +35,8 @@
                 <td><input type="text" name="chem_description" id="chem_description" value="{{chem.chem_description}}"></td>
             </tr>
         </table>
-<!--        <p>Chemikalien-ID: {{chem.chem_id}}</p>-->
-<!--        <p>Name: <input type="text" name="name_name" id="name_name" value="{{chem.name_name}}"></p>-->
-<!--        <p>GSBL-RN: {{chem.gsbl_rn}}</p>-->
-<!--        <p>CAS-RN: {{chem.cas_rn}}</p>-->
-<!--        <p>Sprache: {{chem.language}}</p>-->
-<!--        <p>Namenstyp: {{chem.type}}</p>-->
-<!--        <p>Beschreibung: {{chem.chem_description}}</p>-->
-        <input type="submit" value="Bearbeiten">
+        {{#if user}}
+            <input type="submit" value="Bearbeiten">
+        {{/if}}
     </form>
 </div>

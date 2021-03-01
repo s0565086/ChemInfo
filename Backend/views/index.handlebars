@@ -3,9 +3,18 @@
         <input type="text" id="chemicalParam">
         <input type="button" name="searchBt" value="Suchen" onclick="submit_search()">
     </form>
-    <form id="addForm" method="get" action="/chemicals/addChemical">
-        <input type="submit" name="addBt" value="Hinzufügen">
-    </form>
+    {{#if user}}
+        <form id="addForm" method="get" action="/chemicals/addChemical">
+            <p><input type="submit" name="addBt" value="Hinzufügen"></p>
+        </form>
+<!--        <form action="/logout" method="get">-->
+<!--            <p><input type="submit" name="logoutBt" value="Logout"> </p>-->
+<!--        </form>-->
+    {{else}}
+        <form action="/login" method="get">
+            <p><input type="submit" name="loginBt" value="Login"> </p>
+        </form>
+    {{/if}}
 </div>
 <script>
     function submit_search() {

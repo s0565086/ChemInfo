@@ -6,7 +6,15 @@
 <!--    <link rel="stylesheet" href="./css/style.css">-->
 </head>
 <body>
-<h1>ChemInfo</h1>
+{{#if user}}
+    <form action="/logout" name="logoutForm">
+        <p>
+            Angemeldet als {{user.user_username}}.
+            <input type="submit" name="logoutBt" id="logoutBt" value="Logout">
+        </p>
+    </form>
+{{/if}}
+<h1><a href="/">ChemInfo</a></h1>
 <!--<div class="header" id="header">-->
 <!--    <a href="#Sprache">Sprache</a>-->
 <!--    <a href="#Impressum">Impressum</a>-->

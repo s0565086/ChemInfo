@@ -1,7 +1,11 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
-//const routes = require('./routes/routes');
 const bodyParser = require("body-parser");
+const session = require('express-session');
+const flash = require('express-flash');
+const passport = require('passport');
+const initializePassport = require('./config/passport.config');
+const methodOverride = require('method-override')
 const app = express();
 const PORT = 3001;
 
@@ -16,8 +20,22 @@ app.engine('handlebars', exphbs({
     helpers: require('./config/handlebarHelpers')
 }))
 app.set('view engine', 'handlebars')
+initializePassport(
+    passport
+)
+app.use(flash())
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(methodOverride('_method'))
 
 app.use('/', require('./routes/index.router'))
+
+
 // app.get('/', function (req, res) {
 //     res.render('main')
 // })

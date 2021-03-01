@@ -1,5 +1,5 @@
 const chemModel = require('../model/chems.db');
-const moment = require('moment')
+const logUpdateModel = require('../model/logUpdate.db');
 
 module.exports = {
     insertChemical: (chem) => {
@@ -17,6 +17,7 @@ module.exports = {
         return new Promise( async (resolve, reject) => {
             try{
                 await chemModel.updateChem(chem);
+                await logUpdateModel.logUpdate(chem);
                 resolve()
             }catch(e) {
                 reject(e)

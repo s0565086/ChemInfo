@@ -13,12 +13,15 @@ module.exports = {
             language:req.body.language,
             type:req.body.type
         })
-        res.render('edited')
+        res.render('edited', {
+            user: req.user
+        })
     },
     add_chem: async (req, res) => {
         const types = await typeServie.getAllTypes();
         const languages = await languageService.getAllLanguages();
       res.render('addChemical', {
+          user: req.user,
           types,
           languages
       })
@@ -29,12 +32,14 @@ module.exports = {
         const chemical = {}
         chemical.chem_id = req.body.chem_id
         chemical.name_name = req.body.name_name
+        chemical.name_id = req.body.name_id
         chemical.gsbl_rn = req.body.gsbl_rn
         chemical.cas_rn = req.body.cas_rn
         chemical.language = req.body.language
         chemical.type = req.body.type
         chemical.chem_description= req.body.chem_description
         res.render('editChemicals', {
+            user: req.user,
             chemical,
             types,
             languages
@@ -48,8 +53,10 @@ module.exports = {
             cas_rn:req.body.cas_rn,
             chem_description:req.body.chem_description,
             name_name:req.body.name_name,
+            name_id:req.body.name_id,
             language:req.body.language,
-            type:req.body.type
+            type:req.body.type,
+            user_id:req.user.user_id
         })
         console.log(req.body.type)
         res.render('edited')
@@ -57,12 +64,14 @@ module.exports = {
     chemByNameID: async (req, res) => {
         const chem = await chemsService.getChemByNameID(req.params.param)
         res.render('detailChemical', {
-            chem
+            chem,
+            user: req.user
         })
     },
     chemsById: async (req, res) => {
       const chems = await chemsService.getChemsByID(req.params.param)
         res.render('allChemicals', {
+            user: req.user,
             chems
         })
     },
