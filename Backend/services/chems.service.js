@@ -16,7 +16,6 @@ module.exports = {
         return new Promise( async (resolve, reject) => {
             try{
                 await chemModel.updateChem(chem);
-                // await logUpdateModel.logUpdate(chem);
                 resolve()
             }catch(e) {
                 reject(e)

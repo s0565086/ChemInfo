@@ -34,6 +34,8 @@ app.use(passport.session())
 app.use(methodOverride('_method'))
 
 app.use('/', require('./routes/index.router'))
+const apiRouter = require('./routes/chemRoutes')
+app.use('/api', apiRouter);
 
 app.listen(PORT, () => {
   console.log(`ChemInfo-App listening at http://localhost:${PORT}`);

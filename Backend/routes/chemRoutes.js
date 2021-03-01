@@ -3,9 +3,9 @@ const router = express.Router();
 const pool = require('../config/database');
 
 // GET chemical list
-router.get('/', async (req, res) => {
+router.get('/allChemicals', async (req, res) => {
     try {
-        const chems = await pool.query('SELECT identifications.chem_id, identifications.cas_rn, names.name_name, names.language  ' +
+        const chems = await pool.query('SELECT identifications.chem_id, identifications.gsbl_rn, identifications.cas_rn, names.name_name, names.language  ' +
             'FROM identifications ' +
             'INNER JOIN names ON identifications.chem_id = names.chemical ' +
             'ORDER BY chem_id ASC;');
@@ -16,11 +16,11 @@ router.get('/', async (req, res) => {
 });
 
 // GET chemical by param
-router.get('/:query', async (req, res) => {
+router.get('/chemicals/:query', async (req, res) => {
     const param = req.params.query;
     const query = '%' + param + '%';
     try {
-        const chems = await pool.query('SELECT identifications.chem_id, identifications.cas_rn, names.name_name, names.language ' +
+        const chems = await pool.query('SELECT identifications.chem_id, identifications.gsbl_rn, identifications.cas_rn, identifications.creation_time, identifications.chem_description, names.name_id, names.name_name, names.type, names.language ' +
             'FROM identifications ' +
             'INNER JOIN names ON identifications.chem_id = names.chemical ' +
             'WHERE identifications.cas_rn LIKE $1 ' +

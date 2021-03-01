@@ -10,7 +10,8 @@ module.exports = {
                 'VALUES ($1, $2, $3, $7) ' +
                 'RETURNING chem_id AS chemical) ' +
                 'INSERT INTO names (chemical, name_name, language, type, creation_time) ' +
-                'SELECT chemical, $4, $5, $6, $7 FROM ins1;', [chem.cas_rn, chem.gsbl_rn, chem.chem_description, chem.name_name,
+                'SELECT chemical, $4, $5, $6, $7 FROM ins1;', [chem.cas_rn, chem.gsbl_rn,
+                chem.chem_description, chem.name_name,
                 chem.language, chem.type, timeStamp], (err, result) => {
                 if (err) {
                     reject(err)
@@ -37,7 +38,9 @@ module.exports = {
     },
     getChemByNameId: (nameID) => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT identifications.chem_id, identifications.gsbl_rn, identifications.cas_rn, identifications.creation_time, identifications.chem_description, names.name_id, names.name_name, names.type, names.language ' +
+            db.query('SELECT identifications.chem_id, identifications.gsbl_rn, identifications.cas_rn, ' +
+                'identifications.creation_time, identifications.chem_description, names.name_id, names.name_name, ' +
+                'names.type, names.language ' +
                 'FROM identifications ' +
                 'INNER JOIN names ON identifications.chem_id = names.chemical ' +
                 'WHERE names.name_id = $1 ', [nameID], (err, rows) => {
