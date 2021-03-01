@@ -8,35 +8,35 @@
             </tr>
             <tr>
                 <th>Chemikalien-ID</th>
-                <td>{{chem.chem_id}}</td>
+                <td><input type="text" id="chem_id" name="chem_id" value="{{chem.chem_id}}"></td>
             </tr>
             <tr>
                 <th>Name</th>
-                <td>{{chem.name_name}}</td>
+                <td><input type="text" id="name_name" name="name_name" value="{{chem.name_name}}"></td>
             </tr>
             <tr>
                 <th>GSBL-RN</th>
-                <td>{{chem.gsbl_rn}}</td>
+                <td><input type="text" id="gsbl_rn" name="gsbl_rn" value="{{chem.gsbl_rn}}"></td>
             </tr>
             <tr>
                 <th>CAS-RN</th>
-                <td>{{chem.cas_rn}}</td>
+                <td><input type="text" id="cas_rn" name="cas_rn" value="{{chem.cas_rn}}"></td>
             </tr>
             <tr>
                 <th>Sprache</th>
-                <td>{{chem.language}}</td>
+                <td><input type="text" id="language" name="language" value="{{chem.language}}"></td>
             </tr>
             <tr>
                 <th>Namenstyp</th>
-                <td>{{chem.type}}</td>
+                <td><input type="text" id="type" name="type" value="{{chem.type}}"></td>
             </tr>
             <tr>
                 <th>Beschreibung</th>
-                <td>{{chem.chem_description}}</td>
+                <td><input type="text" id="chem_description" name="chem_description" value="{{chem.chem_description}}"></td>
             </tr>
         </table>
-        {{#if user}}
+        {{#ifCond2 user.user_role "Admin" "Specialist" "QS"}}
             <input class="btn btn-primary ml-3" type="submit" value="Chemikalie Bearbeiten">
-        {{/if}}
+        {{/ifCond2}}
     </form>
 </div>

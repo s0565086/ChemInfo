@@ -3,7 +3,7 @@ const router = express.Router();
 const pool = require('../database');
 
 // GET chemical list
-router.get('/', async (req, res) => {
+router.get('/allChemicals', async (req, res) => {
     try {
         const chems = await pool.query('SELECT identifications.chem_id, identifications.cas_rn, names.name_name, names.language  ' +
             'FROM identifications ' +
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET chemical by param
-router.get('/:query', async (req, res) => {
+router.get('/chemicals/:query', async (req, res) => {
     const param = req.params.query;
     const query = '%' + param + '%';
     try {

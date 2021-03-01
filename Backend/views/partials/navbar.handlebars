@@ -16,11 +16,11 @@
                 <a class="nav-link text-dark" href="/aboutus">About Us</a>
             </li>
             <li class="nav-item active">
-                {{#if user}}
+                {{#ifCond user.user_role "Specialist" "Admin"}}
                     <form id="addForm" method="get" action="/chemicals/addChemical">
                         <input class="btn nav-link text-dark" type="submit" name="addBt" value="Hinzufügen">
                     </form>
-                {{/if}}
+                {{/ifCond}}
             </li>
         </ul>
         <form id="searchForm" class="form-inline my-2">

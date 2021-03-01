@@ -13,11 +13,19 @@ module.exports = {
         })
     },
     updateChem: (chem) => {
-        // console.log(chem)
         return new Promise( async (resolve, reject) => {
             try{
                 await chemModel.updateChem(chem);
-                await logUpdateModel.logUpdate(chem);
+                resolve()
+            }catch(e) {
+                reject(e)
+            }
+        })
+    },
+    logUpdate: (update) => {
+        return new Promise( async (resolve, reject) => {
+            try{
+                await logUpdateModel.logUpdate(update);
                 resolve()
             }catch(e) {
                 reject(e)

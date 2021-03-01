@@ -36,6 +36,8 @@ app.use(passport.session())
 app.use(methodOverride('_method'))
 
 app.use('/', require('./routes/index.router'))
+const apiRouter = require('./routes/chemRoutes')
+app.use('/api', apiRouter);
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
