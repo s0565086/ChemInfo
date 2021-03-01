@@ -10,7 +10,7 @@ router.get('/addChemical', chemsController.add_chem);
 
 router.get('/details/:param', chemsController.chemByNameID);
 
-router.get('/edit/:param', chemsController.edit_Chem);
+router.post('/edit/:param', chemsController.edit_Chem);
 
 router.post('/edited', chemsController.updateChem);
 

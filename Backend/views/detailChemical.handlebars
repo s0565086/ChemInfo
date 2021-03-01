@@ -1,13 +1,47 @@
 <div>
-    <form action="/chemicals/edit/{{chem.name_id}}" method="get">
-        <h2>{{chem.name_name}}</h2>
-        <p>Chemikalien-ID: {{chem.chem_id}}</p>
-        <p>Name: <input type="text" name="name_name" id="name_name" value="{{chem.name_name}}"></p>
-        <p>GSBL-RN: {{chem.gsbl_rn}}</p>
-        <p>CAS-RN: {{chem.cas_rn}}</p>
-        <p>Sprache: {{chem.language}}</p>
-        <p>Namenstyp: {{chem.type}}</p>
-        <p>Beschreibung: {{chem.chem_description}}</p>
+    <h2>{{chem.name_name}}</h2>
+    <form action="/chemicals/edit/{{chem.name_id}}" method="post">
+        <table>
+            <tr>
+                <td>Eigenschaft</td>
+                <td>Wert</td>
+            </tr>
+            <tr>
+                <td>Chemikalien-ID</td>
+                <td><input type="text" name="chem_id" id="chem_id" value="{{chem.chem_id}}"></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="name_name" id="name_name" value="{{chem.name_name}}"></td>
+            </tr>
+            <tr>
+                <td>GSBL-RN</td>
+                <td><input type="text" name="gsbl_rn" id="gsbl_rn" value="{{chem.gsbl_rn}}"></td>
+            </tr>
+            <tr>
+                <td>CAS-RN</td>
+                <td><input type="text" name="cas_rn" id="cas_rn" value="{{chem.cas_rn}}"></td>
+            </tr>
+            <tr>
+                <td>Sprache</td>
+                <td><input type="text" name="language" id="language" value="{{chem.language}}"></td>
+            </tr>
+            <tr>
+                <td>Namenstyp</td>
+                <td><input type="text" name="type" id="type" value="{{chem.type}}"></td>
+            </tr>
+            <tr>
+                <td>Beschreibung</td>
+                <td><input type="text" name="chem_description" id="chem_description" value="{{chem.chem_description}}"></td>
+            </tr>
+        </table>
+<!--        <p>Chemikalien-ID: {{chem.chem_id}}</p>-->
+<!--        <p>Name: <input type="text" name="name_name" id="name_name" value="{{chem.name_name}}"></p>-->
+<!--        <p>GSBL-RN: {{chem.gsbl_rn}}</p>-->
+<!--        <p>CAS-RN: {{chem.cas_rn}}</p>-->
+<!--        <p>Sprache: {{chem.language}}</p>-->
+<!--        <p>Namenstyp: {{chem.type}}</p>-->
+<!--        <p>Beschreibung: {{chem.chem_description}}</p>-->
         <input type="submit" value="Bearbeiten">
     </form>
 </div>
