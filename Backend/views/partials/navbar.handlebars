@@ -1,0 +1,49 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-light">
+    <a class="navbar-brand" href="/">
+        <img src="/static/img/logo.png" alt="Zur Homepage" class="img-fluid" width="80">
+    </a>
+    <button class="navbar-toggler bg-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link text-dark" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link text-dark" href="/aboutus">About Us</a>
+            </li>
+            <li class="nav-item active">
+                {{#ifCond user.user_role "Specialist" "Admin"}}
+                    <form id="addForm" method="get" action="/chemicals/addChemical">
+                        <input class="btn nav-link text-dark" type="submit" name="addBt" value="Hinzufügen">
+                    </form>
+                {{/ifCond}}
+            </li>
+        </ul>
+        <form id="searchForm" class="form-inline my-2">
+            <input class="form-control mr-sm-1" id="chemicalParam" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-0" type="submit" onclick="submit_search()">Search</button>
+        </form>
+        {{#if user}}
+            <form action="/logout" name="logoutForm" class="form-inline my-2 ml-4">
+                Angemeldet als {{user.user_username}}.
+                <input class="ml-2 btn btn-primary" type="submit" name="logoutBt" id="logoutBt" value="Logout">
+            </form>
+        {{else}}
+            <form action="/login" method="get" class="form-inline ml-4">
+                <input class="btn btn-primary" type="submit" name="loginBt" value="Login">
+            </form>
+        {{/if}}
+        <script>
+            function submit_search() {
+                const param = document.getElementById("chemicalParam").value;
+                const url = "/chemicals/search/" + param;
+                document.getElementById("searchForm").action = url;
+                document.getElementById("searchForm").submit();
+            }
+        </script>
+    </div>
+</nav>

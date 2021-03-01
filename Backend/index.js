@@ -1,34 +1,49 @@
 const express = require('express');
-const routes = require('./routes/routes');
-const {openDatabaseConnection} = require('./database');
-const {Substance} = require('./model/Substance');
-
+const exphbs = require('express-handlebars');
+const bodyParser = require("body-parser");
+const session = require('express-session');
+const flash = require('express-flash');
+const passport = require('passport');
+const path = require('path')
+const initializePassport = require('./config/passport.config');
+const methodOverride = require('method-override')
 const app = express();
 const PORT = 3001;
 
-(async () => {
-  const connection = await openDatabaseConnection();
+app.use(bodyParser.json())
+app.use(
+    bodyParser.urlencoded({
+      extended: false,
+    })
+);
+app.engine('handlebars', exphbs({
+    defaultLayout: 'main',
+    layoutsDir: __dirname + '/views/layouts/',
+    helpers: require('./config/handlebarHelpers')
+}))
+app.set('view engine', 'handlebars')
+initializePassport(
+    passport
+)
+app.use(flash())
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(methodOverride('_method'))
 
-  routes(app);
+app.use('/', require('./routes/index.router'))
+const apiRouter = require('./routes/chemRoutes')
+app.use('/api', apiRouter);
 
-  app.get('/:query', async (req, res) => {
-    const query = req.params.query.toLowerCase();
-    const substances = await connection.manager.find(Substance);
+app.use('/static', express.static(path.join(__dirname, 'public')));
 
-    const filteredSubstances = substances.filter((substance) => {
-      return substance.casRn.toLowerCase().startsWith(query) || substance.names.some((name) => {
-        return name.Name.toLowerCase().startsWith(query);
-      });
-    });
-
-    res.json(filteredSubstances);
-  });
-
-
-  app.listen(PORT, () => {
-    console.log(`Example app listening at http://localhost:${PORT}`);
-  });
-})();
+app.listen(PORT, () => {
+  console.log(`Example app listening at http://localhost:${PORT}`);
+});
 
 
 

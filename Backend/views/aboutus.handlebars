@@ -1,0 +1,13 @@
+<div class="container">
+    <h1 class="mt-2">About Us</h1>
+    <p>
+        {{#if msg}}
+            <div class="d-inline-flex p-2 w bd-highlight">
+                {{msg}}
+            </div>
+
+        {{else}}
+            No message was found
+        {{/if}}
+    </p>
+</div>
