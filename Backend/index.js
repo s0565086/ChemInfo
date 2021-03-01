@@ -17,7 +17,7 @@ app.use(
 );
 app.engine('handlebars', exphbs({
     defaultLayout: 'main',
-    helpers: require('./config/handlebarHelpers')
+    helpers: require('./config/handlebars.helpers')
 }))
 app.set('view engine', 'handlebars')
 initializePassport(
@@ -35,20 +35,8 @@ app.use(methodOverride('_method'))
 
 app.use('/', require('./routes/index.router'))
 
-
-// app.get('/', function (req, res) {
-//     res.render('main')
-// })
-
-// const chemRouter = require('./routes/chemRoutes');
-// app.use('/chems', chemRouter);
-
-// const userRouter = require('./routes/userRoutes');
-//
-// app.use('/user', userRouter);
-
 app.listen(PORT, () => {
-  console.log(`Example app listening at http://localhost:${PORT}`);
+  console.log(`ChemInfo-App listening at http://localhost:${PORT}`);
 });
 
 

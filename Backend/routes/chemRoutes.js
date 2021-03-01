@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../database');
+const pool = require('../config/database');
 
 // GET chemical list
 router.get('/', async (req, res) => {

@@ -6,5 +6,5 @@ const pool = new Pool({
   database: 'ChemInfo',
   port: 5432,
 });
-
+console.log('Database connected!')
 module.exports = pool;

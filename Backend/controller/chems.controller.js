@@ -4,7 +4,6 @@ const languageService = require('../services/language.service');
 
 module.exports = {
     insertChem: async (req, res) => {
-        console.log(req.body)
         await chemsService.insertChemical({
             gsbl_rn:req.body.gsbl_rn,
             cas_rn:req.body.cas_rn,
@@ -46,20 +45,26 @@ module.exports = {
         })
     },
     updateChem: async (req, res) => {
-        // console.log(req.body)
-        await chemsService.updateChem({
-            chem_id:req.body.chem_id,
-            gsbl_rn:req.body.gsbl_rn,
-            cas_rn:req.body.cas_rn,
-            chem_description:req.body.chem_description,
-            name_name:req.body.name_name,
-            name_id:req.body.name_id,
-            language:req.body.language,
-            type:req.body.type,
-            user_id:req.user.user_id
+        const chem = {}
+        chem.chem_id = req.body.chem_id
+        chem.gsbl_rn = req.body.gsbl_rn
+        chem.cas_rn = req.body.cas_rn
+        chem.chem_description = req.body.chem_description
+        chem.name_name = req.body.name_name
+        chem.name_id = req.body.name_id
+        chem.language = req.body.language
+        chem.type = req.body.type
+        chem.user_id = req.user.user_id
+        await chemsService.updateChem(chem)
+        res.render('edited', {
+            user: req.user
         })
-        console.log(req.body.type)
-        res.render('edited')
+    },
+    logUpdate: async (req, res) => {
+        const update = {}
+        update.name_id = req.body.name_id
+        update.user_id = req.user.user_id
+        await chemsService.logUpdate(update)
     },
     chemByNameID: async (req, res) => {
         const chem = await chemsService.getChemByNameID(req.params.param)

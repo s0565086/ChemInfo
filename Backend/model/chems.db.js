@@ -1,4 +1,4 @@
-const db = require('../database');
+const db = require('../config/database');
 const moment = require('moment');
 
 module.exports = {
@@ -46,7 +46,6 @@ module.exports = {
                 } else {
                     let results = rows.rows
                     resolve(results[0])
-                    console.log(results[0])
                 }
             })
         })

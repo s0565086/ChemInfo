@@ -16,7 +16,7 @@ function initialize(passport) {
             if(password === user.user_password){
                 return done(null, user)
             }else {
-                return done(null, false, { message: 'Passwort ist falsch!'})
+                return done(null, false, { message: 'Passwort ist falsch! Bitte nochmal probieren!'})
             }
         }catch (e) {
             return done(e)

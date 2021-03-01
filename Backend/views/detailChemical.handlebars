@@ -35,8 +35,8 @@
                 <td><input type="text" name="chem_description" id="chem_description" value="{{chem.chem_description}}"></td>
             </tr>
         </table>
-        {{#if user}}
+        {{#ifCond2 user.user_role "Admin" "Specialist" "QS"}}
             <input type="submit" value="Bearbeiten">
-        {{/if}}
+        {{/ifCond2}}
     </form>
 </div>
