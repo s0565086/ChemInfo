@@ -1,26 +1,31 @@
-<div>
-    <form id="searchForm" method="get">
-        <input type="text" id="chemicalParam">
-        <input type="button" name="searchBt" value="Suchen" onclick="submit_search()">
-    </form>
-    {{#if user}}
-        <form id="addForm" method="get" action="/chemicals/addChemical">
-            <p><input type="submit" name="addBt" value="Hinzufügen"></p>
-        </form>
-<!--        <form action="/logout" method="get">-->
-<!--            <p><input type="submit" name="logoutBt" value="Logout"> </p>-->
-<!--        </form>-->
-    {{else}}
-        <form action="/login" method="get">
-            <p><input type="submit" name="loginBt" value="Login"> </p>
-        </form>
-    {{/if}}
+<div class="container" style="margin-top: 8%;">
+    <div class="col-md-auto col-md-offset-1">
+        <div class="row">
+            <div id="logo" class="text-center">
+                <h1>Chem Info</h1><p>Search your chemicals</p>
+            </div>
+        </div>
+        <div class="row">
+            <form role="form" id="form-buscar">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input id="inputChem" class="form-control" type="text" placeholder="Search..." required/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="submit" onclick="submit_search()">
+                                <i class="glyphicon glyphicon-search" aria-hidden="true"></i> Search
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <script>
     function submit_search() {
-        const param = document.getElementById("chemicalParam").value
+        const param = document.getElementById("inputChem").value
         const url = "/chemicals/search/" + param
-        document.getElementById("searchForm").action = url
-        document.getElementById("searchForm").submit();
+        document.getElementById("form-buscar").action = url
+        document.getElementById("form-buscar").submit();
     }
 </script>

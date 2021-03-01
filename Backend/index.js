@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const session = require('express-session');
 const flash = require('express-flash');
 const passport = require('passport');
+const path = require('path')
 const initializePassport = require('./config/passport.config');
 const methodOverride = require('method-override')
 const app = express();
@@ -17,6 +18,7 @@ app.use(
 );
 app.engine('handlebars', exphbs({
     defaultLayout: 'main',
+    layoutsDir: __dirname + '/views/layouts/',
     helpers: require('./config/handlebarHelpers')
 }))
 app.set('view engine', 'handlebars')
@@ -35,17 +37,7 @@ app.use(methodOverride('_method'))
 
 app.use('/', require('./routes/index.router'))
 
-
-// app.get('/', function (req, res) {
-//     res.render('main')
-// })
-
-// const chemRouter = require('./routes/chemRoutes');
-// app.use('/chems', chemRouter);
-
-// const userRouter = require('./routes/userRoutes');
-//
-// app.use('/user', userRouter);
+app.use('/static', express.static(path.join(__dirname, 'public')));
 
 app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`);

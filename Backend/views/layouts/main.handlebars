@@ -3,41 +3,16 @@
 <head>
     <meta charset="utf-8" />
     <title>ChemInfo</title>
-<!--    <link rel="stylesheet" href="./css/style.css">-->
+    <link rel="stylesheet" href="/static/css/style.css"><link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
 </head>
 <body>
-{{#if user}}
-    <form action="/logout" name="logoutForm">
-        <p>
-            Angemeldet als {{user.user_username}}.
-            <input type="submit" name="logoutBt" id="logoutBt" value="Logout">
-        </p>
-    </form>
-{{/if}}
-<h1><a href="/">ChemInfo</a></h1>
-<!--<div class="header" id="header">-->
-<!--    <a href="#Sprache">Sprache</a>-->
-<!--    <a href="#Impressum">Impressum</a>-->
-<!--    <a href="#Hilfe">Hilfe</a>-->
-<!--    <a href="#API">API</a>-->
-<!--    <a href="#Internes">Internes</a>-->
-<!--    <div class="search-container">-->
-<!--        <form name="quickSearchForm" method="get">-->
-<!--            <input type="text" placeholder="Schnellsuche..." id="quickSearch">-->
-<!--            <input type="button" name="quickSearchBt" value="Suchen" onclick="submit_search()">-->
-<!--        </form>-->
-<!--    </div>-->
-<!--</div>-->
+{{> navbar}}
 
 {{{body}}}
-
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </body>
-<!--<script>-->
-<!--    function submit_search() {-->
-<!--        const param = document.getElementById("quickSearch").value-->
-<!--        const url = "/chemicals/search/" + param-->
-<!--        document.getElementById("quickSearchForm").action = url-->
-<!--        document.getElementById("quickSearchForm").submit();-->
-<!--    }-->
-<!--</script>-->
 </html>
