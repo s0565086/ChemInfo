@@ -1,7 +1,9 @@
 const db = require('../database');
+const moment = require('moment');
 
 module.exports = {
     insertChemical: (chem) => {
+        const timeStamp = moment.utc().format()
         return new Promise((resolve, reject) => {
             db.query('WITH ins1 AS (' +
                 'INSERT INTO identifications (cas_rn, gsbl_rn, chem_description, creation_time) ' +
@@ -9,7 +11,7 @@ module.exports = {
                 'RETURNING chem_id AS chemical) ' +
                 'INSERT INTO names (chemical, name_name, language, type, creation_time) ' +
                 'SELECT chemical, $4, $5, $6, $7 FROM ins1;', [chem.cas_rn, chem.gsbl_rn, chem.chem_description, chem.name_name,
-                chem.language, chem.type, chem.creation_time], (err, result) => {
+                chem.language, chem.type, timeStamp], (err, result) => {
                 if (err) {
                     reject(err)
                 } else {
@@ -23,8 +25,8 @@ module.exports = {
             db.query('WITH upt AS(' +
                 'UPDATE identifications SET cas_rn = $1, gsbl_rn = $2, chem_description = $3 ' +
                 'WHERE chem_id = $4) ' +
-                'UPDATE names SET name_name = $5, language = $6 ' +
-                'WHERE chemical = $4', [chem.cas_rn, chem.gsbl_rn, chem.chem_description, chem.chem_id, chem.name_name, chem.language], (err, results) => {
+                'UPDATE names SET name_name = $5, language = $6, type = $7 ' +
+                'WHERE chemical = $4', [chem.cas_rn, chem.gsbl_rn, chem.chem_description, chem.chem_id, chem.name_name, chem.language, chem.type], (err, results) => {
                 if(err) {
                     reject(err)
                 } else {
@@ -33,30 +35,6 @@ module.exports = {
             })
         }))
     },
-    // updateNames: (chem) => {
-    //     return new Promise((resolve, reject) => {
-    //         db.query('UPDATE names SET name_name = $1, language = $2 ' +
-    //             'WHERE chemical = $3', [chem.name_name, chem.language, chem.chem_id], (err, results) => {
-    //             if (err) {
-    //                 reject(err)
-    //             }else{
-    //                 resolve(results)
-    //             }
-    //         })
-    //     })
-    // },
-    // updateIdentifications: (chem) => {
-    //     return new Promise((resolve, reject) => {
-    //         db.query('UPDATE identifications SET cas_rn = $1, gsbl_rn = $2, chem_description = $3 ' +
-    //             'WHERE chem_id= $4', [chem.cas_rn, chem.gsbl_rn, chem.chem_description, chem.chem_id], (err, results) => {
-    //             if (err) {
-    //                 reject(err)
-    //             } else {
-    //                 resolve(results)
-    //             }
-    //         })
-    //         })
-    // },
     getChemByNameId: (nameID) => {
         return new Promise((resolve, reject) => {
             db.query('SELECT identifications.chem_id, identifications.gsbl_rn, identifications.cas_rn, identifications.creation_time, identifications.chem_description, names.name_id, names.name_name, names.type, names.language ' +

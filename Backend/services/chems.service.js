@@ -1,4 +1,5 @@
 const chemModel = require('../model/chems.db');
+const moment = require('moment')
 
 module.exports = {
     insertChemical: (chem) => {

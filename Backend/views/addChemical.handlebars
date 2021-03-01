@@ -3,9 +3,20 @@
             <p>GSBL-RN: <input type="text" name="gsbl_rn" id="gsbl_rn"></p>
             <p>CAS_RN: <input type="text" name="cas_rn" id="cas_rn"></p>
             <p>Name: <input type="text" name="name_name" id="name_name"></p>
-            <p>Namenstyp: <input type="text" name="type" id="type"></p>
-            <p>Sprache: <input type="text" name="language" id="language"></p>
-            <p> Erstellungszeit: <input type="text" name="creation_time" id="creation_time"> </p>
+            <p> Namenstyp:
+                <select id="type" name="type">
+                    {{#each types}}
+                        <option value="{{this.type_name}}">{{this.type_name}}</option>
+                    {{/each}}
+                </select>
+            </p>
+            <p> Sprache:
+                <select id="language" name="language">
+                    {{#each languages}}
+                        <option value="{{this.language_abbreviation}}">{{this.language_name}}</option>
+                    {{/each}}
+                </select>
+            </p>
             <p>Beschreibung: <input type="text" name="chem_description" id="chem_description"></p>
         <input type="submit" value="Speichern">
     </form>
